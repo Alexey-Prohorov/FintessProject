@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace FitnessProject.BL.Model
 {
-    internal class User
+    [Serializable]
+    public class User
     {
         #region Свойства
         public string Name { get; }
@@ -41,7 +42,7 @@ namespace FitnessProject.BL.Model
                 throw new ArgumentNullException("Пол не может быть null", nameof(gender));
             }
 
-            if (birthDate < DateTime.Parse("01.01.1900") || birthDate <= DateTime.Now)
+            if (birthDate < DateTime.Parse("01.01.1900") || birthDate >= DateTime.Now)
             {
                 throw new ArgumentException("Невозможная дата рождения", nameof(birthDate));
             }

@@ -12,9 +12,11 @@ namespace FitnessProject.BL.Model
         #region Свойства
         public string Name { get; }
         public Gender Gender { get; }
-        public DateTime DateTime { get; }
+        public DateTime BirthDate { get; }
         public double Weight { get; set; }
         public double Height { get; set; }
+
+        public int Age { get { return DateTime.Now.Year - BirthDate.Year; } }
         #endregion
 
         /// <summary>
@@ -59,14 +61,23 @@ namespace FitnessProject.BL.Model
             #endregion
             Name = name;
             Gender = gender;
-            DateTime = birthDate;
+            BirthDate = birthDate;
             Weight = weight;
             Height = height;
         }
 
+
+        public User (string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException("Имя не может пыть пустым", nameof(name));
+            }
+            Name = name;
+        }
         public override string ToString()
         {
-            return Name;
+            return Name+" "+Age;
         }
     }
 }
